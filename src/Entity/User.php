@@ -58,27 +58,27 @@ class User implements UserInterface
         return $this;
     }
 	
-	public function getUserIdentifier(): ?string {
-		return '';
-	}
+    public function getUserIdentifier(): ?string {
+	return '';
+    }
 	
-	public function getRoles(): ?array
+    public function getRoles(): ?array
     {
-		$roles[] = 'ROLE_USER';
+	$roles[] = 'ROLE_USER';
         return array_unique($roles);
     }
 	
-	public function getPassword(): ?string
+    public function getPassword(): ?string
     {
         return '';
     }
 	
-	public function getSalt(): ?string
+    public function getSalt(): ?string
     {
         return '';
     }
 	
-	public function eraseCredentials()
+    public function eraseCredentials()
     {
         return true;
     }
