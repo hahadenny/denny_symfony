@@ -7,8 +7,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class BasicTest extends ApiTestCase
 {
-    public function testAddCar(): void
-    {
+    	public function testAddCar() {
 		$data['Type'] = 'new';
 		$data['Msrp'] = '10000';
 		$data['Year'] = '2011';
@@ -19,16 +18,16 @@ class BasicTest extends ApiTestCase
 		
 		$input['query'] = $data;
 		
-        $response = static::createClient()->request('POST', '/addCar', $input);
+        	$response = static::createClient()->request('POST', '/addCar', $input);
 		
-        $this->assertResponseIsSuccessful();
+        	$this->assertResponseIsSuccessful();
 		$this->assertJson($response->getContent());		
 		$result = json_decode($response->getContent(), true);		
 		$this->assertArrayHasKey('Id', $result);
 		
 		global $carId;
 		$carId = $result['Id'];
-    }
+    	}
 	
 	public function testGetCar() {
 		global $carId;
@@ -37,14 +36,13 @@ class BasicTest extends ApiTestCase
 		
 		$response = static::createClient()->request('GET', "/getCar/$carId", $data);
 		
-        $this->assertResponseIsSuccessful();
+        	$this->assertResponseIsSuccessful();
 		$this->assertJson($response->getContent());		
 		$result = json_decode($response->getContent(), true);		
 		$this->assertArrayHasKey('Id', $result);
 	}
 	
-	public function testGetCarList()
-    {
+	public function testGetCarList() {
 		global $carId;
 		
 		$data['Id'] = $carId;
@@ -53,7 +51,7 @@ class BasicTest extends ApiTestCase
 		
 		$response = static::createClient()->request('GET', "/getCarList", $input);
 		
-        $this->assertResponseIsSuccessful();
+       		$this->assertResponseIsSuccessful();
 		$this->assertJson($response->getContent());		
 		$result = json_decode($response->getContent(), true);	
 		$this->assertArrayHasKey('0', $result);
@@ -69,7 +67,7 @@ class BasicTest extends ApiTestCase
 		
 		$response = static::createClient()->request('PATCH', "/editCar/$carId", $input);
 		
-        $this->assertResponseIsSuccessful();
+        	$this->assertResponseIsSuccessful();
 		$this->assertJson($response->getContent());		
 		$result = json_decode($response->getContent(), true);	
 		$this->assertArrayHasKey('Vin', $result);
