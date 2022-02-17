@@ -1,7 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-
 getCarList:
     path:       /getCarList
     controller: App\Controller\MainController::getCarList
