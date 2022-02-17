@@ -1,13 +1,13 @@
 ### 1. To Clone Denny Test Auto API:
 
 ```bash
-git clone git@github.com:hahadenny/denny_test.git
+git clone git@github.com:hahadenny/denny_symfony.git
 ```
 
 ### 2. Install vendor dependencies:
 
 ```bash
-cd denny_test
+cd denny_symfony
 composer install
 ```
 
@@ -16,17 +16,13 @@ composer install
 ```bash
 vi .env
 
-DB_HOST=
-DB_PORT=
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
+DATABASE_URL=
 ```
 
 ### 4. Import `Vehicle` and `User` tables:
 
 ```bash
-php artisan migrate
+php bin/console doctrine:migrations:migrate
 ```
 
 ### 5. Fixture testing with PHPUnit:
