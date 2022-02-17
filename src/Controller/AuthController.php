@@ -11,7 +11,7 @@ use App\Entity\User;
 
 class AuthController extends AbstractController
 {
-    public function __construct(RequestStack $requestStack, ManagerRegistry $doctrine)
+    	public function __construct(RequestStack $requestStack, ManagerRegistry $doctrine)
     	{
 		$request = $requestStack->getCurrentRequest();
         	$username = $request->headers->get('UserName') ? $request->headers->get('UserName') : '';
