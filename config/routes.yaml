@@ -1,0 +1,28 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+getCarList:
+    path:       /getCarList
+    controller: App\Controller\MainController::getCarList
+    methods:    GET
+    
+getCar:
+    path:       /getCar/{Id}
+    controller: App\Controller\MainController::getCar
+    methods:    GET
+
+addCar:
+    path:       /addCar
+    controller: App\Controller\MainController::addCar
+    methods:    POST
+    
+editCar:
+    path:       /editCar/{Id}
+    controller: App\Controller\MainController::editCar
+    methods:    PATCH
+
+delCar:
+    path:       /delCar/{Id}
+    controller: App\Controller\MainController::delCar
+    methods:    DELETE
