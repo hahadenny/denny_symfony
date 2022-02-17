@@ -14,10 +14,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class VehicleRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Vehicle::class);
-    }
+    	public function __construct(ManagerRegistry $registry)
+    	{
+        	parent::__construct($registry, Vehicle::class);
+    	}
 	
 	public function getCarList($request) {
 		$query = $this->createQueryBuilder('v')
