@@ -14,10 +14,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class VehicleRepository extends ServiceEntityRepository
 {
-    	public function __construct(ManagerRegistry $registry)
-    	{
-        	parent::__construct($registry, Vehicle::class);
-    	}
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Vehicle::class);
+    }
 	
 	public function getCarList($request) {
 		$query = $this->createQueryBuilder('v')
@@ -47,6 +47,24 @@ class VehicleRepository extends ServiceEntityRepository
 		
 		if ($request->get('Vin'))  
 			$query->andWhere('v.Vin = :Vin')->setParameter('Vin', $request->get('Vin'));
+		
+		if ($request->get('MinYear'))  
+			$query->andWhere('v.Year >= :MinYear')->setParameter('MinYear', $request->get('MinYear'));
+		
+		if ($request->get('MaxYear'))  
+			$query->andWhere('v.Year <= :MaxYear')->setParameter('MaxYear', $request->get('MaxYear'));
+		
+		if ($request->get('MinMsrp'))  
+			$query->andWhere('v.Msrp >= :MinMsrp')->setParameter('MinMsrp', $request->get('MinMsrp'));
+		
+		if ($request->get('MaxMsrp'))  
+			$query->andWhere('v.Msrp <= :MaxMsrp')->setParameter('MaxMsrp', $request->get('MaxMsrp'));
+		
+		if ($request->get('MinMiles'))  
+			$query->andWhere('v.Miles >= :MinMiles')->setParameter('MinMiles', $request->get('MinMiles'));
+		
+		if ($request->get('MaxMiles'))  
+			$query->andWhere('v.Miles <= :MaxMiles')->setParameter('MaxMiles', $request->get('MaxMiles'));
 		
 		$carType = $_ENV['CAR_TYPE'];
 		if ($carType)
@@ -79,4 +97,33 @@ class VehicleRepository extends ServiceEntityRepository
 		
 		return $result;
 	}
+
+    // /**
+    //  * @return Vehicle[] Returns an array of Vehicle objects
+    //  */
+    /*
+    public function findByExampleField($value)
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('v.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    */
+
+    /*
+    public function findOneBySomeField($value): ?Vehicle
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    */
 }
