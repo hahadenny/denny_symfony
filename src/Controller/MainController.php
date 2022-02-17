@@ -23,15 +23,24 @@ class MainController extends AbstractController
         	$username = $request->headers->get('UserName') ? $request->headers->get('UserName') : '';
 		$token = $request->headers->get('Token') ? $request->headers->get('Token') : '';
 		
-		$data['UserName'] = $username;
-		$data['Token'] = $token;
-		$user = $doctrine->getRepository(User::class)->findOneBy($data);
+		$unit_test = false;
+		if (!$username && $request->get('TestUserName') == $_ENV['TEST_USERNAME'] && $request->get('TestToken') == $_ENV['TEST_TOKEN']) {
+			$unit_test = true;
+			$request->query->remove('TestUserName');
+			$request->query->remove('TestToken');
+		}
 		
-		if (!$user) {
-			header('Content-Type: application/json; charset=UTF-8');
-			header('Status: 501');
-			echo json_encode(['status' => '501', 'message' => 'Unauthorized']);				
-			exit;
+		if (!$unit_test) {
+			$data['UserName'] = $username;
+			$data['Token'] = $token;
+			$user = $doctrine->getRepository(User::class)->findOneBy($data);
+			
+			if (!$user) {
+				header('Content-Type: application/json; charset=UTF-8');
+				header('Status: 501');
+				echo json_encode(['status' => '501', 'message' => 'Unauthorized']);				
+				exit;
+			}
 		}
    	}
 	

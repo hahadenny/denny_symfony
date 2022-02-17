@@ -16,6 +16,9 @@ class BasicTest extends ApiTestCase
 		$data['Miles'] = '8000';
 		$data['Vin'] = 'ABCD123456789999';
 		
+		$data['TestUserName'] = $_ENV['TEST_USERNAME'];
+		$data['TestToken'] = $_ENV['TEST_TOKEN'];
+		
 		$input['query'] = $data;
 		
         	$response = static::createClient()->request('POST', '/addCar', $input);
@@ -32,9 +35,12 @@ class BasicTest extends ApiTestCase
 	public function testGetCar() {
 		global $carId;
 		
-		$data = array();
+		$data['TestUserName'] = $_ENV['TEST_USERNAME'];
+		$data['TestToken'] = $_ENV['TEST_TOKEN'];
 		
-		$response = static::createClient()->request('GET', "/getCar/$carId", $data);
+		$input['query'] = $data;
+		
+		$response = static::createClient()->request('GET', "/getCar/$carId", $input);
 		
         	$this->assertResponseIsSuccessful();
 		$this->assertJson($response->getContent());		
@@ -46,6 +52,8 @@ class BasicTest extends ApiTestCase
 		global $carId;
 		
 		$data['Id'] = $carId;
+		$data['TestUserName'] = $_ENV['TEST_USERNAME'];
+		$data['TestToken'] = $_ENV['TEST_TOKEN'];
 		
 		$input['query'] = $data;
 		
@@ -62,6 +70,8 @@ class BasicTest extends ApiTestCase
 		global $carId;
 		
 		$data['Vin'] = 'AAAAA5555544444';
+		$data['TestUserName'] = $_ENV['TEST_USERNAME'];
+		$data['TestToken'] = $_ENV['TEST_TOKEN'];
 		
 		$input['query'] = $data;
 		
@@ -77,9 +87,12 @@ class BasicTest extends ApiTestCase
 	public function testDelCar() {
 		global $carId;
 		
-		$data = array();
+		$data['TestUserName'] = $_ENV['TEST_USERNAME'];
+		$data['TestToken'] = $_ENV['TEST_TOKEN'];
 		
-		$response = static::createClient()->request('DELETE', "/delCar/$carId", $data);
+		$input['query'] = $data;
+		
+		$response = static::createClient()->request('DELETE', "/delCar/$carId", $input);
 		$this->assertResponseIsSuccessful();
 		$this->assertJsonContains(['status' => 'success']);	
 	}
