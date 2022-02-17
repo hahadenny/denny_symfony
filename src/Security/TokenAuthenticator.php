@@ -19,9 +19,9 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 {
     private $em;
 	
-	private $username;
+    private $username;
 	
-	private $token;
+    private $token;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -35,24 +35,24 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function supports(Request $request): bool
     {
-		//print_r($request->headers->all()); exit;
+	//print_r($request->headers->all()); exit;
 		
-		//for unit testing
-		if (!$request->headers->has('Token') && $request->get('TestToken')) {
-			$request->headers->set('Token', $request->get('TestToken'));
-			$request->query->remove('TestToken');
-		}
+	//for unit testing
+	if (!$request->headers->has('Token') && $request->get('TestToken')) {
+		$request->headers->set('Token', $request->get('TestToken'));
+		$request->query->remove('TestToken');
+	}
 		
-		if (!$request->headers->has('UserName') && $request->get('TestUserName')) {
-			$request->headers->set('UserName', $request->get('TestUserName'));
-			$request->query->remove('TestUserName');
-		}
+	if (!$request->headers->has('UserName') && $request->get('TestUserName')) {
+		$request->headers->set('UserName', $request->get('TestUserName'));
+		$request->query->remove('TestUserName');
+	}
 		
-		if (!$request->headers->has('Token') || !$request->headers->has('UserName')) {
-			throw new CustomUserMessageAuthenticationException(
-                'Authenticatoin is required.'
-            );
-		}
+	if (!$request->headers->has('Token') || !$request->headers->has('UserName')) {
+		throw new CustomUserMessageAuthenticationException(
+                	'Authenticatoin is required.'
+            	);
+	}
 		
         return $request->headers->has('Token');
     }
