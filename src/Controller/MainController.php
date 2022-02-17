@@ -18,9 +18,9 @@ use App\Entity\User;
 class MainController extends AbstractController
 {
 	public function __construct(RequestStack $requestStack, ManagerRegistry $doctrine)
-    {
+    	{
 		$request = $requestStack->getCurrentRequest();
-        $username = $request->headers->get('UserName') ? $request->headers->get('UserName') : '';
+        	$username = $request->headers->get('UserName') ? $request->headers->get('UserName') : '';
 		$token = $request->headers->get('Token') ? $request->headers->get('Token') : '';
 		
 		$data['UserName'] = $username;
@@ -33,9 +33,9 @@ class MainController extends AbstractController
 			echo json_encode(['status' => '501', 'message' => 'Unauthorized']);				
 			exit;
 		}
-    }
+   	}
 	
-    public function getCarList(Request $request, ValidatorInterface $validator, ManagerRegistry $doctrine, SerializerInterface $serializer) {
+    	public function getCarList(Request $request, ValidatorInterface $validator, ManagerRegistry $doctrine, SerializerInterface $serializer) {
 		//print_r($request->query->all()); exit;	
 
 		$constraints = new Assert\Collection([
@@ -68,7 +68,7 @@ class MainController extends AbstractController
 		
 		$json = $serializer->serialize($result, 'json');
 		return new JsonResponse($json, 200, [], true);
-    }
+    	}
 	
 	public function getCar($Id, Request $request, ValidatorInterface $validator, ManagerRegistry $doctrine, SerializerInterface $serializer) {
 		$constraints = new Assert\Collection([
@@ -171,11 +171,11 @@ class MainController extends AbstractController
 		}
 		
 		$car = $doctrine->getRepository(Vehicle::class)->find($Id);
-        if (!$car) {
-            $result['status'] = '500';
+        	if (!$car) {
+           		 $result['status'] = '500';
 			$result['message'] = "No car found with ID: $Id.";
 			return new JsonResponse($result, 500);
-        }
+       		}
 		
 		if ($request->get('Type'))
 			$car->setType($request->get('Type'));
@@ -193,7 +193,7 @@ class MainController extends AbstractController
 			$car->setMiles($request->get('Miles'));
 		
 		$entityManager = $doctrine->getManager();
-        $entityManager->flush();
+        	$entityManager->flush();
 		
 		$json = $serializer->serialize($car, 'json');
 		return new JsonResponse($json, 200, [], true);
@@ -215,15 +215,15 @@ class MainController extends AbstractController
 		}
 		
 		$car = $doctrine->getRepository(Vehicle::class)->find($Id);
-        if (!$car) {
-            $result['status'] = '500';
+        	if (!$car) {
+           		$result['status'] = '500';
 			$result['message'] = "No car found with ID: $Id.";
 			return new JsonResponse($result, 500);
-        }
+        	}
 		
 		$car->setDeleted(1);
 		$entityManager = $doctrine->getManager();
-        $entityManager->flush();
+        	$entityManager->flush();
 
 		$result['status'] = 'success';
 
