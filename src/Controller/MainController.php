@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,10 +12,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Doctrine\Persistence\ManagerRegistry;
-use App\Controller\AuthController;
 use App\Entity\Vehicle;
 
-class MainController extends AuthController
+class MainController extends AbstractController
 {
     	public function getCarList(Request $request, ValidatorInterface $validator, ManagerRegistry $doctrine, SerializerInterface $serializer) {
 		//print_r($request->query->all()); exit;	

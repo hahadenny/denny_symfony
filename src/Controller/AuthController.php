@@ -11,9 +11,9 @@ use App\Entity\User;
 
 class AuthController extends AbstractController
 {
-    	public function __construct(RequestStack $requestStack, ManagerRegistry $doctrine)
+    public function __construct(RequestStack $requestStack, ManagerRegistry $doctrine)
     	{
-		$request = $requestStack->getCurrentRequest();
+		/*$request = $requestStack->getCurrentRequest();
         	$username = $request->headers->get('UserName') ? $request->headers->get('UserName') : '';
 		$token = $request->headers->get('Token') ? $request->headers->get('Token') : '';
 		
@@ -35,6 +35,6 @@ class AuthController extends AbstractController
 				echo json_encode(['status' => '501', 'message' => 'Unauthorized']);				
 				exit;
 			}
-		}
+		}*/
    	}
 }
