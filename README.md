@@ -1,3 +1,6 @@
+## This is a Sample Symfony CRUD REST API built by Denny Choi
+
+
 ### 1. To Clone Denny Test Auto API:
 
 ```bash
@@ -33,6 +36,7 @@ php bin/console doctrine:migrations:migrate
 
 ### 6. Swagger Documentation
 
+wget [https://github.com/hahadenny/denny_symfony/raw/master/denny-auto-api-swagger.zip](https://github.com/hahadenny/denny_/raw/master/denny-auto-api-swagger.zip)
 ```bash
 unzip denny-auto-api-swagger.zip
 ```
